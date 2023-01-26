@@ -3,6 +3,9 @@ package org.sid.ciname.entities;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +25,7 @@ public class Cinema implements Serializable {
 	private double longitude,latitude,altitude;
 	private int nombreSalles;
 	@OneToMany(mappedBy="cinema")// la relation entre cinema et Salle 
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Collection<Salle> salles;
 	@ManyToOne
 	private Ville ville;

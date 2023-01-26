@@ -3,6 +3,9 @@ package org.sid.ciname.entities;
 import java.util.Collection;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +29,7 @@ public class Film {
 	private double duree;
 	private String photo;
 	@OneToMany(mappedBy="film")
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Collection<Projection> projections;
 	@ManyToOne
 	private Categorie categorie;
