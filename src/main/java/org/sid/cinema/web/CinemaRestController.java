@@ -13,6 +13,7 @@ import org.sid.cinema.dao.FilmRepository;
 import org.sid.cinema.dao.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.Data;
+
+@CrossOrigin("*")
 @RestController
 public class CinemaRestController {
 	@Autowired
@@ -31,7 +34,7 @@ public class CinemaRestController {
 	public List<Film> getFilms(){
 		return filmRespository.findAll();
 	}
-	@GetMapping(path="/image/Film/{id}", produces=MediaType.IMAGE_JPEG_VALUE)
+	@GetMapping(path="/imageFilm/{id}", produces=MediaType.IMAGE_JPEG_VALUE)
 	public byte[] image(@PathVariable (name="id")Long id)throws Exception{
 		Film f = filmRespository.findById(id).get();
 		String photoName = f.getPhoto();
@@ -57,5 +60,6 @@ public class CinemaRestController {
 @Data
 class TicketForm{
 	private String nomClient;
+	private int codePaiement;
 	private List<Long> tickets = new ArrayList<>();
 }
